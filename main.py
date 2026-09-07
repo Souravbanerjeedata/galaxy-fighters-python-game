@@ -258,8 +258,9 @@ def draw_text_center(text, font, color, y_offset=0):
     return surf
 
 
-def draw_health_bar(x, y, health, max_health, color):
-    bar_width = 170
+def draw_health_bar(x, y, health, max_health, color, align_right=False):
+    """Draw a glowing health bar. If align_right=True, number is drawn to the left of the bar."""
+    bar_width = 150
     bar_height = 16
     fill = max(0, int((health / max_health) * bar_width))
 
@@ -270,14 +271,25 @@ def draw_health_bar(x, y, health, max_health, color):
     pygame.draw.rect(WIN, (18, 18, 32), (x, y, bar_width, bar_height), border_radius=5)
 
     if fill > 0:
-        pygame.draw.rect(WIN, color, (x, y, fill, bar_height), border_radius=5)
+        # For right-aligned bars, fill from the right
+        if align_right:
+            fill_x = x + (bar_width - fill)
+        else:
+            fill_x = x
+        pygame.draw.rect(WIN, color, (fill_x, y, fill, bar_height), border_radius=5)
         shine = pygame.Surface((fill, bar_height // 2), pygame.SRCALPHA)
         pygame.draw.rect(shine, (255, 255, 255, 55), (0, 0, fill, bar_height // 2), border_radius=3)
-        WIN.blit(shine, (x, y))
+        WIN.blit(shine, (fill_x, y))
 
     pygame.draw.rect(WIN, WHITE, (x, y, bar_width, bar_height), 2, border_radius=5)
+
     txt = HEALTH_FONT.render(str(health), True, WHITE)
-    WIN.blit(txt, (x + bar_width + 8, y - 4))
+    if align_right:
+        # Number to the left of the bar
+        WIN.blit(txt, (x - txt.get_width() - 8, y - 4))
+    else:
+        # Number to the right of the bar
+        WIN.blit(txt, (x + bar_width + 8, y - 4))
 
 
 def create_explosion(x, y, base_color, particles, count=22):
@@ -331,12 +343,12 @@ def draw_window(red, yellow, yellow_bullets, red_bullets, red_health, yellow_hea
     pygame.draw.rect(WIN, (190, 210, 255), (bx, shake_y, BORDER.width, HEIGHT))
 
     # Health
-    draw_health_bar(12 + shake_x, 12 + shake_y, yellow_health, MAX_HEALTH, YELLOW)
-    draw_health_bar(WIDTH - 182 + shake_x, 12 + shake_y, red_health, MAX_HEALTH, RED)
+    draw_health_bar(12 + shake_x, 12 + shake_y, yellow_health, MAX_HEALTH, YELLOW, align_right=False)
+    draw_health_bar(WIDTH - 162 + shake_x, 12 + shake_y, red_health, MAX_HEALTH, RED, align_right=True)
     y_label = TINY_FONT.render("YELLOW", True, YELLOW)
     r_label = TINY_FONT.render("RED", True, RED)
     WIN.blit(y_label, (12 + shake_x, 32 + shake_y))
-    WIN.blit(r_label, (WIDTH - 182 + shake_x, 32 + shake_y))
+    WIN.blit(r_label, (WIDTH - 162 + shake_x, 32 + shake_y))
 
     # After-images (motion blur)
     yellow_after.draw(WIN)
@@ -482,9 +494,9 @@ def show_menu(stars):
         draw_text_center("2-Player Local Battle", MENU_FONT, CYAN, y_offset=-45)
 
         if int(pulse * 2.2) % 2 == 0:
-            draw_text_center("▶  Press SPACE to Start", SMALL_FONT, GREEN, y_offset=35)
+            draw_text_center("Press SPACE to Start", SMALL_FONT, GREEN, y_offset=35)
         else:
-            draw_text_center("   Press SPACE to Start", SMALL_FONT, (50, 160, 90), y_offset=35)
+            draw_text_center("Press SPACE to Start", SMALL_FONT, (50, 160, 90), y_offset=35)
 
         draw_text_center("Press ESC to Quit", TINY_FONT, (130, 130, 160), y_offset=75)
 
