@@ -8,40 +8,57 @@ Two players face off across a divided battlefield. Dodge enemy fire, shoot accur
 
 ## 🎮 Game Preview
 
-**[Galaxy Fighter](preview.png)**
+<!-- 
+  Add your game screenshot here.
+  Example:
+  ![Galaxy Fighters Screenshot](preview.png)
+  
+  Or drag & drop an image into this README on GitHub.
+-->
+
+**[Insert Game Screenshot Here]**
+
+*(Recommended size: 900×500 or similar aspect ratio)*
 
 ---
 
 ## ✨ Features
 
-- Classic 2-player local multiplayer
-- Smooth spaceship movement and bullet physics
-- Health system (10 HP each)
-- Sound effects for shooting and hits
-- Space-themed background and ships
-- Winner announcement screen
-- Simple and beginner-friendly codebase
+- Clean main menu
+- Modern health bars (instead of just numbers)
+- Restart after match (`R` key)
+- Proper quit support (`ESC`)
+- Volume-controlled sound effects
+- Smooth 60 FPS gameplay
+- Beginner-friendly code structure
+- Fixed original bugs (missing colon, recursive restart, etc.)
 
 ---
 
 ## 🕹️ Controls
 
-| Player            | Movement        | Shoot        |
-| ----------------- | --------------- | ------------ |
-| **Yellow** (Left) | `W` `A` `S` `D` | `Left Ctrl`  |
-| **Red** (Right)   | `↑` `←` `↓` `→` | `Right Ctrl` |
+| Player            | Movement          | Shoot       |
+|-------------------|-------------------|-------------|
+| **Yellow** (Left) | `W` `A` `S` `D`   | `Left Ctrl` |
+| **Red** (Right)   | `↑` `←` `↓` `→`   | `Right Ctrl` |
 
-- Each player can have a maximum of **3 bullets** on screen at a time.
-- Ships cannot cross the center border.
+- Max **3 bullets** on screen per player
+- Ships cannot cross the center border
+
+**Menu:**  
+- `SPACE` → Start game  
+- `ESC` → Quit  
+
+**After match:**  
+- `R` → Restart  
+- `ESC` → Quit  
 
 ---
 
 ## 📦 Requirements
 
-- Python 3.8 or higher
+- Python 3.8+
 - Pygame
-
-Install Pygame with:
 
 ```bash
 pip install pygame
@@ -51,23 +68,12 @@ pip install pygame
 
 ## 🚀 How to Run
 
-1. **Clone the repository**
-
-   ```bash
-   git clone https://github.com/Souravbanerjeedata/galaxy-fighters-python-game.git
-   cd galaxy-fighters-python-game
-   ```
-
-2. **Install dependencies**
-
-   ```bash
-   pip install pygame
-   ```
-
-3. **Run the game**
-   ```bash
-   python main.py
-   ```
+```bash
+git clone https://github.com/Souravbanerjeedata/galaxy-fighters-python-game.git
+cd galaxy-fighters-python-game
+pip install pygame
+python main.py
+```
 
 ---
 
@@ -76,54 +82,50 @@ pip install pygame
 ```
 galaxy-fighters-python-game/
 ├── Assets/
-│   ├── Grenade+1.mp3          # Hit sound
-│   ├── Gun+Silencer.mp3       # Shoot sound
-│   ├── space.png              # Background
+│   ├── hit.mp3                 # Hit sound
+│   ├── shoot.mp3               # Shoot sound
+│   ├── space.png               # Background
 │   ├── spaceship_red.png
 │   └── spaceship_yellow.png
-├── main.py                    # Main game code
+├── main.py                     # Improved game code
 └── README.md
 ```
 
----
-
-## 🛠️ How It Works (Quick Overview)
-
-- Uses Pygame for rendering, input, and audio
-- Two rectangular hitboxes for the spaceships
-- Custom events for bullet hits (`YELLOW_HIT` / `RED_HIT`)
-- Separate movement handlers for each player
-- Simple collision detection with `colliderect()`
+> **Note:** Sound files were renamed from the original (`Grenade+1.mp3` → `hit.mp3`, `Gun+Silencer.mp3` → `shoot.mp3`) for better compatibility.
 
 ---
 
-## 💡 Possible Improvements / Ideas
+## 🛠️ Improvements Made
 
-- Add a main menu and restart option
-- Power-ups (speed boost, extra health, multi-shot)
-- Particle effects / explosion animations
-- Score tracking / win streak
+| Original Issue                  | Fixed / Improved                     |
+|--------------------------------|--------------------------------------|
+| Missing `:` in function        | Fixed                                |
+| Recursive `main()` call        | Proper loop + restart                |
+| No menu                        | Added main menu                      |
+| Plain health numbers           | Visual health bars                   |
+| No restart option              | Press `R` to play again              |
+| Hard-coded paths               | Relative paths using `__file__`      |
+| No volume control              | Sound volumes adjusted               |
+| List modification while iterating | Safe `[:]` copy used               |
+
+---
+
+## 💡 Future Ideas
+
+- Power-ups (shield, rapid fire, health pack)
+- Particle explosions
 - Background music
+- Score / win streak counter
+- AI opponent
 - Different ship skins
-- AI opponent mode
-
-Feel free to fork and improve!
 
 ---
 
 ## 📄 License
 
-This project is open source. Feel free to use, modify, and share.
+Open source – feel free to use, modify and share.
 
 ---
 
-## 🙌 Credits
-
-- Built with [Pygame](https://www.pygame.org/)
-- Inspired by classic arcade space shooters
-
----
-
-**Made with ❤️ by Sourav Banerjee**
-
-⭐ Star this repo if you enjoyed the game!
+**Made with ❤️ by Sourav Banerjee**  
+⭐ Star the repo if you like it!
