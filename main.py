@@ -11,9 +11,11 @@ def draw_window():
     pygame.display.update()
 
 def main():
+    clock = pygame.time.clock()
     run = True
 
     while run:
+        clock.tick(60)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
